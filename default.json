@@ -3,6 +3,7 @@
   "extends": [
     "config:recommended"
   ],
+  "timezone": "Europe/London",
   "schedule": ["at 05:00 on monday and wednesday"],
   "assignees": [
     "MattWhite-personal"
