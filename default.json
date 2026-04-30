@@ -87,6 +87,15 @@
       "description": "Set npm strategy to bump",
       "matchDatasources": ["npm"],
       "rangeStrategy": "bump"
+    },
+    {
+      "description": "Fast PR creation for frequently-majored actions, still needs approval",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["major"],
+      "matchPackageNames": [
+        "actions/github-script"
+      ],
+      "minimumReleaseAge": "3 days"
     }
   ]
 }
