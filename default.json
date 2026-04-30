@@ -1,0 +1,103 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "schedule": ["at 05:00 on monday and wednesday"],
+  "assignees": [
+    "MattWhite-personal"
+  ],
+  "vulnerabilityAlerts": {
+    "labels": ["security"],
+    "automerge": false,
+    "schedule": ["at any time"]
+  },
+  "osvVulnerabilityAlerts": true,
+  "dependencyDashboardOSVVulnerabilitySummary": "all",
+  "transitiveRemediation": true,
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["at 05:00 on monday"]
+  },
+  "packageRules": [
+    {
+      "description": "Wait 3 days for patch releases",
+      "matchUpdateTypes": ["patch"],
+      "minimumReleaseAge": "3 days"
+    },
+    {
+      "description": "Wait 7 days for minor releases",
+      "matchUpdateTypes": ["minor"],
+      "minimumReleaseAge": "7 days"
+    },
+    {
+      "description": "Wait 30 days for major releases",
+      "matchUpdateTypes": ["major"],
+      "minimumReleaseAge": "30 days"
+    },
+    {
+      "description": "Group Astro Updates together",
+      "matchManagers": ["npm"],
+      "groupName": "Astro Packages",
+      "matchUpdateTypes": ["patch", "minor"],
+      "matchPackageNames": ["astro", "@astrojs/*"]
+    },
+    {
+      "description": "Require manual approval - Astro major updates",
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true,
+      "matchPackageNames": ["astro", "@astrojs/*"]
+    },
+    {
+      "description": "Group AzureRM Terraform Updates",
+      "matchManagers": ["terraform"],
+      "groupName": "Terraform AzureRM provider",
+      "matchUpdateTypes": ["patch", "minor"],
+      "matchPackageNames": ["hashicorp/azurerm"]
+    },
+    {
+      "description": "Require manual approval - Terraform AzureRM Major Updates",
+      "matchManagers": ["terraform"],
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true,
+      "matchPackageNames": ["hashicorp/azurerm"]
+    },
+    {
+      "description": "Group AzureAD Terraform Updates",
+      "matchManagers": ["terraform"],
+      "groupName": "Terraform AzureAD provider",
+      "matchUpdateTypes": ["patch", "minor"],
+      "matchPackageNames": ["hashicorp/azuread"]
+    },
+    {
+      "description": "Require manual approval - Terraform AzureAD Major Updates",
+      "matchManagers": ["terraform"],
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true,
+      "matchPackageNames": ["hashicorp/azuread"]
+    },
+    {
+      "description": "Group GitHub Actions",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "groupName": "GitHub Actions"
+    },
+    {
+      "description": "Require manual approval - GitHub Actions Major Updates",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true
+    },
+    {
+      "description": "Pin GitHub Actions to commit SHA",
+      "matchManagers": ["github-actions"],
+      "pinDigests": true
+    },
+    {
+      "description": "Pin versions for all managed ecosystems",
+      "matchManagers": ["terraform", "npm", "github-actions"],
+      "rangeStrategy": "pin"
+    }
+  ]
+}
