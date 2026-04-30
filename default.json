@@ -4,101 +4,89 @@
     "config:recommended"
   ],
   "timezone": "Europe/London",
-  "schedule": ["at 05:00 on monday and wednesday"],
   "assignees": [
     "MattWhite-personal"
   ],
   "vulnerabilityAlerts": {
     "labels": ["security"],
-    "automerge": false,
-    "schedule": ["at any time"]
+    "automerge": false
   },
   "osvVulnerabilityAlerts": true,
   "dependencyDashboardOSVVulnerabilitySummary": "all",
-  "transitiveRemediation": true,
+  "semanticCommits": "enabled",
+  "semanticCommitType": "chore",
+  "semanticCommitScope": "deps",
+  "prConcurrentLimit": 10,
+  "prHourlyLimit": 7,
+  "minimumReleaseAgeBehaviour": "timestamp-required",
   "lockFileMaintenance": {
     "enabled": true,
-    "schedule": ["at 05:00 on monday"]
+    "schedule": ["before 4am on monday"]
   },
   "packageRules": [
     {
       "description": "Wait 3 days for patch releases",
       "matchUpdateTypes": ["patch"],
-      "minimumReleaseAge": "3 days"
+      "minimumReleaseAge": "3 days",
+      "semanticCommitType": "fix"
     },
     {
       "description": "Wait 7 days for minor releases",
       "matchUpdateTypes": ["minor"],
-      "minimumReleaseAge": "7 days"
+      "minimumReleaseAge": "7 days",
+      "semanticCommitType": "feat"
     },
     {
       "description": "Wait 30 days for major releases",
       "matchUpdateTypes": ["major"],
-      "minimumReleaseAge": "30 days"
+      "minimumReleaseAge": "30 days",
+      "semanticCommitType": "feat"
     },
     {
-      "description": "Group Astro Updates together",
+      "description": "Group npm Updates together",
       "matchManagers": ["npm"],
       "groupName": "Astro Packages",
-      "matchUpdateTypes": ["patch", "minor"],
-      "matchPackageNames": ["astro", "@astrojs/*"]
+      "matchUpdateTypes": ["patch","minor"]
     },
     {
-      "description": "Require manual approval - Astro major updates",
+      "description": "Require manual approval - npm major updates",
       "matchManagers": ["npm"],
       "matchUpdateTypes": ["major"],
-      "dependencyDashboardApproval": true,
-      "matchPackageNames": ["astro", "@astrojs/*"]
+      "dependencyDashboardApproval": true
     },
     {
-      "description": "Group AzureRM Terraform Updates",
+      "description": "Group Terraform Updates",
       "matchManagers": ["terraform"],
       "groupName": "Terraform AzureRM provider",
-      "matchUpdateTypes": ["patch", "minor"],
-      "matchPackageNames": ["hashicorp/azurerm"]
+      "matchUpdateTypes": ["patch","minor"]
     },
     {
-      "description": "Require manual approval - Terraform AzureRM Major Updates",
+      "description": "Require manual approval - Terraform Major Updates",
       "matchManagers": ["terraform"],
       "matchUpdateTypes": ["major"],
-      "dependencyDashboardApproval": true,
-      "matchPackageNames": ["hashicorp/azurerm"]
-    },
-    {
-      "description": "Group AzureAD Terraform Updates",
-      "matchManagers": ["terraform"],
-      "groupName": "Terraform AzureAD provider",
-      "matchUpdateTypes": ["patch", "minor"],
-      "matchPackageNames": ["hashicorp/azuread"]
-    },
-    {
-      "description": "Require manual approval - Terraform AzureAD Major Updates",
-      "matchManagers": ["terraform"],
-      "matchUpdateTypes": ["major"],
-      "dependencyDashboardApproval": true,
-      "matchPackageNames": ["hashicorp/azuread"]
+      "dependencyDashboardApproval": true
     },
     {
       "description": "Group GitHub Actions",
       "matchManagers": ["github-actions"],
-      "matchUpdateTypes": ["patch", "minor"],
-      "groupName": "GitHub Actions"
+      "matchUpdateTypes": ["patch","minor"],
+      "groupName": "Github Actions"
     },
     {
-      "description": "Require manual approval - GitHub Actions Major Updates",
+      "description": "Require manual Approval - Github Actions Major Updates",
       "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["major"],
       "dependencyDashboardApproval": true
     },
     {
-      "description": "Pin GitHub Actions to commit SHA",
+      "description": "Pin Github Actions to commit SHA",
       "matchManagers": ["github-actions"],
       "pinDigests": true
     },
     {
-      "description": "Pin versions for all managed ecosystems",
-      "matchManagers": ["terraform", "npm", "github-actions"],
-      "rangeStrategy": "pin"
+      "description": "Set npm strategy to bump",
+      "matchDatasources": ["npm"],
+      "rangeStrategy": "bump"
     }
   ]
 }
