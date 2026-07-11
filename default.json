@@ -43,7 +43,6 @@
       "minimumReleaseAge": "30 days",
       "semanticCommitType": "feat"
     },
-
     {
       "description": "Group the entire Astro ecosystem together across ALL update types (fixes PR #397 scenario)",
       "matchManagers": ["npm"],
@@ -70,7 +69,6 @@
       "dependencyDashboardApproval": true,
       "labels": ["dependencies", "astro", "major"]
     },
-
     {
       "description": "Fallback: group any other npm patch/minor together",
       "matchManagers": ["npm"],
@@ -83,7 +81,6 @@
       "matchUpdateTypes": ["major"],
       "dependencyDashboardApproval": true
     },
-
     {
       "description": "Group Terraform Updates",
       "matchManagers": ["terraform"],
@@ -96,7 +93,6 @@
       "matchUpdateTypes": ["major"],
       "dependencyDashboardApproval": true
     },
-
     {
       "description": "Group GitHub Actions",
       "matchManagers": ["github-actions"],
@@ -123,7 +119,6 @@
       ],
       "minimumReleaseAge": "3 days"
     },
-
     {
       "description": "Pin npm packages exactly (matches your package.json style)",
       "matchDatasources": ["npm"],
