@@ -46,13 +46,15 @@
     {
       "description": "Group the entire Astro ecosystem together across ALL update types (fixes PR #397 scenario)",
       "matchManagers": ["npm"],
-      "matchPackageNames": ["astro"],
-      "matchPackagePatterns": [
-        "^@astrojs/",
-        "^@mdx-js/",
-        "^remark-",
-        "^rehype-",
-        "^shiki$"
+      "matchPackageNames": [
+        "astro",
+        "shiki",
+        "@astrojs/**",
+        "@mdx-js/**",
+        "remark-*",
+        "remark-**",
+        "rehype-*",
+        "rehype-**"
       ],
       "groupName": "astro ecosystem",
       "groupSlug": "astro-ecosystem"
@@ -60,10 +62,10 @@
     {
       "description": "Astro ecosystem majors still require manual approval, but bundled as one PR",
       "matchManagers": ["npm"],
-      "matchPackageNames": ["astro"],
-      "matchPackagePatterns": [
-        "^@astrojs/",
-        "^@mdx-js/"
+      "matchPackageNames": [
+        "astro",
+        "@astrojs/**",
+        "@mdx-js/**"
       ],
       "matchUpdateTypes": ["major"],
       "dependencyDashboardApproval": true,
@@ -72,7 +74,7 @@
     {
       "description": "Fallback: group any other npm patch/minor together",
       "matchManagers": ["npm"],
-      "matchUpdateTypes": ["patch","minor"],
+      "matchUpdateTypes": ["patch", "minor"],
       "groupName": "npm dependencies"
     },
     {
@@ -85,7 +87,7 @@
       "description": "Group Terraform Updates",
       "matchManagers": ["terraform"],
       "groupName": "Terraform AzureRM provider",
-      "matchUpdateTypes": ["patch","minor"]
+      "matchUpdateTypes": ["patch", "minor"]
     },
     {
       "description": "Require manual approval - Terraform Major Updates",
@@ -96,7 +98,7 @@
     {
       "description": "Group GitHub Actions",
       "matchManagers": ["github-actions"],
-      "matchUpdateTypes": ["patch","minor"],
+      "matchUpdateTypes": ["patch", "minor"],
       "groupName": "Github Actions"
     },
     {
