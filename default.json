@@ -9,7 +9,9 @@
   ],
   "vulnerabilityAlerts": {
     "labels": ["security"],
-    "automerge": false
+    "automerge": false,
+    "schedule": ["at any time"],
+    "minimumReleaseAge": "0 days"
   },
   "osvVulnerabilityAlerts": true,
   "dependencyDashboardOSVVulnerabilitySummary": "all",
@@ -24,31 +26,59 @@
   },
   "packageRules": [
     {
-      "description": "Wait 3 days for patch releases",
+      "description": "Cooling-off: wait 3 days for patch releases",
       "matchUpdateTypes": ["patch"],
       "minimumReleaseAge": "3 days",
       "semanticCommitType": "fix"
     },
     {
-      "description": "Wait 7 days for minor releases",
+      "description": "Cooling-off: wait 7 days for minor releases",
       "matchUpdateTypes": ["minor"],
       "minimumReleaseAge": "7 days",
       "semanticCommitType": "feat"
     },
     {
-      "description": "Wait 30 days for major releases",
+      "description": "Cooling-off: wait 30 days for major releases",
       "matchUpdateTypes": ["major"],
       "minimumReleaseAge": "30 days",
       "semanticCommitType": "feat"
     },
     {
-      "description": "Group npm Updates together",
+      "description": "Group the entire Astro ecosystem together across ALL update types (fixes PR #397 scenario)",
       "matchManagers": ["npm"],
-      "groupName": "Astro Packages",
-      "matchUpdateTypes": ["patch","minor"]
+      "matchPackageNames": [
+        "astro",
+        "shiki",
+        "@astrojs/**",
+        "@mdx-js/**",
+        "remark-*",
+        "remark-**",
+        "rehype-*",
+        "rehype-**"
+      ],
+      "groupName": "astro ecosystem",
+      "groupSlug": "astro-ecosystem"
     },
     {
-      "description": "Require manual approval - npm major updates",
+      "description": "Astro ecosystem majors still require manual approval, but bundled as one PR",
+      "matchManagers": ["npm"],
+      "matchPackageNames": [
+        "astro",
+        "@astrojs/**",
+        "@mdx-js/**"
+      ],
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true,
+      "labels": ["dependencies", "astro", "major"]
+    },
+    {
+      "description": "Fallback: group any other npm patch/minor together",
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "groupName": "npm dependencies"
+    },
+    {
+      "description": "Require manual approval - other npm major updates",
       "matchManagers": ["npm"],
       "matchUpdateTypes": ["major"],
       "dependencyDashboardApproval": true
@@ -57,7 +87,7 @@
       "description": "Group Terraform Updates",
       "matchManagers": ["terraform"],
       "groupName": "Terraform AzureRM provider",
-      "matchUpdateTypes": ["patch","minor"]
+      "matchUpdateTypes": ["patch", "minor"]
     },
     {
       "description": "Require manual approval - Terraform Major Updates",
@@ -68,7 +98,7 @@
     {
       "description": "Group GitHub Actions",
       "matchManagers": ["github-actions"],
-      "matchUpdateTypes": ["patch","minor"],
+      "matchUpdateTypes": ["patch", "minor"],
       "groupName": "Github Actions"
     },
     {
@@ -83,11 +113,6 @@
       "pinDigests": true
     },
     {
-      "description": "Set npm strategy to bump",
-      "matchDatasources": ["npm"],
-      "rangeStrategy": "bump"
-    },
-    {
       "description": "Fast PR creation for frequently-majored actions, still needs approval",
       "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["major"],
@@ -95,6 +120,11 @@
         "actions/github-script"
       ],
       "minimumReleaseAge": "3 days"
+    },
+    {
+      "description": "Pin npm packages exactly (matches your package.json style)",
+      "matchDatasources": ["npm"],
+      "rangeStrategy": "pin"
     }
   ]
 }
