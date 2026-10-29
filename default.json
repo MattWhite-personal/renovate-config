@@ -125,6 +125,29 @@
       "description": "Pin npm packages exactly (matches your package.json style)",
       "matchDatasources": ["npm"],
       "rangeStrategy": "pin"
+    },
+        {
+      "description": "Node.js runtime patch/minor: single PR for .nvmrc and engines, no cooling-off",
+      "matchDatasources": ["node-version"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "groupName": "node runtime",
+      "minimumReleaseAge": null,
+      "labels": ["node", "runtime"],
+      "prPriority": 10
+    },
+    {
+      "description": "Node.js runtime major: manual approval",
+      "matchDatasources": ["node-version"],
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true,
+      "labels": ["node", "runtime", "major"]
+    },
+    {
+      "description": "Keep engines.node floor tracking the latest Node release",
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["engines"],
+      "matchPackageNames": ["node"],
+      "rangeStrategy": "bump"
     }
   ]
 }
